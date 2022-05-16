@@ -15,6 +15,7 @@
 		<postgresql.version>42.3.3</postgresql.version>
 		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
 		<maven-surefire-plagin.version>3.0.0-M5</maven-surefire-plagin.version>
+		<liquibase.version>4.9.1</liquibase.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -51,7 +52,11 @@
 			<artifactId>mapstruct</artifactId>
 			<version>${org.mapstruct.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<version>${liquibase.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

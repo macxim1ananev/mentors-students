@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="maxim.ananev" id="drop students table">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="students"/>
+        </preConditions>
+        <rollback>
+            <dropTable tableName="students"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="maxim.ananev" id="drop mentors table">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="mentors"/>
+        </preConditions>
+        <rollback>
+            <dropTable tableName="mentors"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="maxim.ananev" id="drop images table">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="images"/>
+        </preConditions>
+        <rollback>
+            <dropTable tableName="images"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="maxim.ananev" id="drop about_users table">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="about_users"/>
+        </preConditions>
+        <rollback>
+            <dropTable tableName="about_users"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="maxim.ananev" id="drop subjects table">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="subjects"/>
+        </preConditions>
+        <rollback>
+            <dropTable tableName="subjects"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

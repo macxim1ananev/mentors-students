@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+<!--subjects table-->
+    <changeSet author="maksim.ananev" id="create subjects table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table subjects already exists">
+            <not>
+                <tableExists tableName="subjects"/>
+            </not>
+        </preConditions>
+        <createTable tableName="subjects">
+            <column  name="subjects_id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="subject_name" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+
+<!--about_users table-->
+    <changeSet author="maksim.ananev" id="create about_users table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table about_users already exists">
+            <not>
+                <tableExists tableName="about_users"/>
+            </not>
+        </preConditions>
+        <createTable tableName="about_users">
+            <column  name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="text_about_user" type="varchar(500)"/>
+        </createTable>
+    </changeSet>
+
+<!--images-->
+<!--    TODO отрефакторить чтобы сохранять картинки-->
+    <changeSet author="maksim.ananev" id="create images table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table images already exists">
+            <not>
+                <tableExists tableName="images"/>
+            </not>
+        </preConditions>
+        <createTable tableName="images">
+            <column  name="image_id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="images_file" type="varchar(300)"/>
+        </createTable>
+    </changeSet>
+
+    <!--mentors    -->
+    <changeSet author="maksim.ananev" id="create mentors table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table mentors already exists">
+            <not>
+                <tableExists tableName="mentors"/>
+            </not>
+        </preConditions>
+        <createTable tableName="mentors">
+            <column  name="mentor_id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(30)"/>
+            <column name="last_name" type="varchar(30)"/>
+            <column name="age" type="varchar(5)"/>
+            <column name="email" type="varchar(50)"/>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image_id" type="bigint">
+                <constraints foreignKeyName="fk__students__images" references="images(image_id)"
+                             nullable="false" unique="true"/>
+            </column>
+            <column name="about_user" type="bigint">
+                <constraints foreignKeyName="fk__mentors__about_users" references="about_users(id)"
+                             nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+<!--students-->
+    <changeSet author="maksim.ananev" id="create students table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table students already exists">
+            <not>
+                <tableExists tableName="students"/>
+            </not>
+        </preConditions>
+        <createTable tableName="students">
+            <column  name="student_id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="first_name" type="varchar(30)"/>
+            <column name="last_name" type="varchar(30)"/>
+            <column name="age" type="varchar(5)"/>
+            <column name="email" type="varchar(50)"/>
+            <column name="password" type="varchar(255)">
+            <constraints nullable="false"/>
+            </column>
+            <column name="image_id" type="bigint">
+            <constraints foreignKeyName="fk__students__images" references="images(image_id)"
+                         nullable="false" unique="true"/>
+            </column>
+            <column name="about_user" type="bigint">
+                <constraints foreignKeyName="fk__students__about_users" references="about_users(id)"
+                             nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+<!--    student_mentor-->
+    <changeSet author="maksim.ananev" id="create student_mentor table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table student_mentor already exists">
+            <not>
+                <tableExists tableName="student_mentor"/>
+            </not>
+        </preConditions>
+        <createTable tableName="student_mentor">
+            <column  name="student_id" type="bigint">
+                <constraints foreignKeyName="fk__student__students" references="students(student_id)"
+                             nullable="false" unique="true"/>
+            </column>
+            <column name="mentor_id" type="bigint">
+            <constraints foreignKeyName="fk__mentor__mentors" references="mentors(mentor_id)"
+                         nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
