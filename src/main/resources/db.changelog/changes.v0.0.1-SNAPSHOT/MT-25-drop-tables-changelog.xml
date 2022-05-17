@@ -8,21 +8,13 @@
 
     <changeSet author="maxim.ananev" id="drop students table">
         <preConditions onFail="MARK_RAN">
-            <tableExists tableName="students"/>
+            <tableExists tableName="users"/>
         </preConditions>
         <rollback>
-            <dropTable tableName="students"/>
+            <dropTable tableName="users"/>
         </rollback>
     </changeSet>
 
-    <changeSet author="maxim.ananev" id="drop mentors table">
-        <preConditions onFail="MARK_RAN">
-            <tableExists tableName="mentors"/>
-        </preConditions>
-        <rollback>
-            <dropTable tableName="mentors"/>
-        </rollback>
-    </changeSet>
 
     <changeSet author="maxim.ananev" id="drop images table">
         <preConditions onFail="MARK_RAN">
@@ -48,6 +40,15 @@
         </preConditions>
         <rollback>
             <dropTable tableName="subjects"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="maxim.ananev" id="drop users_subjects table">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="users_subjects"/>
+        </preConditions>
+        <rollback>
+            <dropTable tableName="users_subjects"/>
         </rollback>
     </changeSet>
 

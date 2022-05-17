@@ -11,3 +11,11 @@ spring:
 
   liquibase:
     change-log: classpath:/db.changelog/changelog-master.xml
+
+jwt:
+  secret:
+    access: ${jwt.secret.access}
+    refresh: ${jwt.secret.refresh}
+  expiration:
+    access: 10
+    refresh: 30
