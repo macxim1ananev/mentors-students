@@ -1,23 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
-        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
 <!--    SUBJECTS-->
     <changeSet author="maksim.ananev" id="load data into subjects table">
         <insert tableName="subjects">
-            <column name="subjects_id" value="1"/>
+            <column name="id" value="1"/>
             <column name="subject_name" value="Java"/>
+        </insert>
+        <insert tableName="subjects">
+            <column name="id" value="2"/>
+            <column name="subject_name" value="Python"/>
+        </insert>
+        <insert tableName="subjects">
+            <column name="id" value="3"/>
+            <column name="subject_name" value="C++"/>
+        </insert>
+        <insert tableName="subjects">
+            <column name="id" value="4"/>
+            <column name="subject_name" value="C#"/>
+        </insert>
+        <insert tableName="subjects">
+            <column name="id" value="5"/>
+            <column name="subject_name" value="Javascript"/>
+        </insert>
+        <insert tableName="subjects">
+            <column name="id" value="6"/>
+            <column name="subject_name" value="PHP"/>
+        </insert>
+        <insert tableName="subjects">
+            <column name="id" value="7"/>
+            <column name="subject_name" value="Go"/>
         </insert>
     </changeSet>
 
 <!--    ABOUT_USERS-->
     <changeSet author="maksim.ananev" id="load data into about_users table">
         <insert tableName="about_users">
-            <column name="id" value="1"/>
+            <column name="id" value="10"/>
             <column name="text_about_user" value="Here we will be save user description about yourself"/>
         </insert>
     </changeSet>
@@ -25,37 +47,30 @@
 <!--    IMAGES-->
     <changeSet author="maksim.ananev" id="load data into images table">
         <insert tableName="images">
-            <column name="image_id" value="1"/>
-            <column name="images_file" value="Hetre we will be save user load image for avatar"/>
+            <column name="id" value="10"/>
+            <column name="image_location" value="src/image/etc/../.."/>
         </insert>
     </changeSet>
 
 <!--    STUDENTS-->
-    <changeSet author="maksim.ananev" id="load data into students table">
-        <insert tableName="students">
-            <column name="student_id" value="1"/>
+    <changeSet author="maksim.ananev" id="load data into users table">
+        <insert tableName="users">
+            <column name="id" value="10"/>
             <column name="first_name" value="Bob"/>
             <column name="last_name" value="Smith"/>
             <column name="age" value="25"/>
             <column name="email" value="bob.smith@gmail.com"/>
             <column name="password" value="password"/>
-            <column name="image_id" value="1"/>
-            <column name="about_user" value="1"/>
+            <column name="image_id" value="10"/>
+            <column name="about_user" value="10"/>
+            <column name="user_role" value="STUDENT"/>
         </insert>
     </changeSet>
 
-<!--    MENTORS-->
-    <changeSet author="maksim.ananev" id="load data into mentors table">
-        <insert tableName="mentors">
-            <column name="mentor_id" value="1"/>
-            <column name="first_name" value="David"/>
-            <column name="last_name" value="Parker"/>
-            <column name="age" value="30"/>
-            <column name="email" value="david.parker@gmail.com"/>
-            <column name="password" value="password"/>
-            <column name="image_id" value="1"/>
-            <column name="about_user" value="1"/>
+    <changeSet id="load data into users_subjects" author="maksim.ananev">
+        <insert tableName="users_subjects">
+            <column name="user_id" value="10"/>
+            <column name="subject_id" value="1"/>
         </insert>
     </changeSet>
-
 </databaseChangeLog>
