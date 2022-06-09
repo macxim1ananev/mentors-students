@@ -8,9 +8,11 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
-
   liquibase:
     change-log: classpath:/db.changelog/changelog-master.xml
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
 
 jwt:
   secret:
