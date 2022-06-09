@@ -5,6 +5,7 @@ import com.example.mentorsstudents.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -13,7 +14,7 @@ import java.util.Optional;
 public class UserUtil {
 
     private final UserRepository userRepository;
-
+    @Transactional(readOnly = true)
     public User findByLogin(String login){
         return userRepository.findByLogin(login)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("Unknown user %s ", login)));
