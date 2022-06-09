@@ -19,7 +19,6 @@ import com.example.mentorsstudents.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
@@ -81,4 +80,5 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .userRole(UserRole.NOT_REGISTERED)
                 .build();
     }
+
 }
