@@ -14,7 +14,14 @@ import java.util.Set;
 @Mapper(componentModel = "spring", uses = {SubjectMapper.class, ImageMapper.class})
 
 public interface UserMapper {
-
+    @Mapping(source = "user.userId", target = "id")
+    @Mapping(source = "user.firstName", target = "firstName")
+    @Mapping(source = "user.lastName", target = "lastName")
+    @Mapping(source = "user.age", target = "age")
+    @Mapping(source = "user.email", target = "email")
+    @Mapping(source = "user.image", target = "image")
+    @Mapping(source = "user.aboutUser", target = "aboutUser")
+    @Mapping(source = "user.userRole", target = "userRole")
     UserDto toDto(User user);
 
     User toUser(UserDto userDto);

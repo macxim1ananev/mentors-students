@@ -3,6 +3,7 @@ package com.example.mentorsstudents.controller;
 import com.example.mentorsstudents.dto.ErrorExtension;
 import com.example.mentorsstudents.dto.ErrorResponse;
 import com.example.mentorsstudents.service.exception.RegistrationException;
+import com.example.mentorsstudents.service.exception.UserNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,13 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(RegistrationException.class)
     public ResponseEntity<ErrorExtension> handleUserRegistrationExceptions(Exception exception) {
+        ErrorExtension body = new ErrorExtension(exception.getMessage(),
+                String.valueOf(HttpStatus.CONFLICT.value()));
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorExtension> handleUserNotFoundExceptions(Exception exception){
         ErrorExtension body = new ErrorExtension(exception.getMessage(),
                 String.valueOf(HttpStatus.CONFLICT.value()));
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);

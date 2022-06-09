@@ -13,7 +13,6 @@ public class UserDto {
     String lastName;
     Integer age;
     String email;
-    String password;
     Image image;
     AboutUser aboutUser;
     UserRole userRole;
