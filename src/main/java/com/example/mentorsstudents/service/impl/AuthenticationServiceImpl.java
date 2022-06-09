@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final JwtTokenUtil jwtTokenUtil;
 
     @Override
+    @Transactional(readOnly = true)
     public JwtTokenResponseDto authenticate(UserAuthRequestDto authRequestDto) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authRequestDto.getLogin(), authRequestDto.getPassword()));
@@ -33,6 +35,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public JwtTokenResponseDto refreshAccessToken(String refreshToken) {
         if (jwtTokenUtil.validateRefreshToken(refreshToken)) {
             final User user = userService.loadUserByLogin(

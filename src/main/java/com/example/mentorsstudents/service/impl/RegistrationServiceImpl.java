@@ -19,6 +19,8 @@ import com.example.mentorsstudents.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Optional;
 
 @Service
@@ -61,6 +63,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CheckUserRegistrationDto checkUserRegistration(String email) {
         Optional<User> checkedUser = userRepository.findByLogin(email);
         return checkedUser.isEmpty() ? getNotRegisteredCheckUserDto(email) : getRegisteredCheckUserDto(checkedUser.get());

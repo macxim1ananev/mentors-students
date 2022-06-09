@@ -8,6 +8,7 @@ import com.example.mentorsstudents.service.MentorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +22,7 @@ public class MentorServiceImpl implements MentorService {
     private final UserMapper userMapper;
 
     @Override
+    @Transactional(readOnly = true)
     public List<MentorForSearchPageDto> findAll(Pageable pageable) {
         return userRepository.findAllByUserRole(UserRole.MENTOR)
                 .stream().map(userMapper::toMentorForSearchPagDtoFromUser)

@@ -8,6 +8,7 @@ import com.example.mentorsstudents.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ public class StudentServiceImpl implements StudentService {
     private final UserMapper userMapper;
 
     @Override
+    @Transactional(readOnly = true)
     public List<StudentForSearchPageDto> findAll(Pageable pageable) {
         return userRepository.findAllByUserRole(UserRole.STUDENT)
                 .stream().map(userMapper::toStudentForSearchPageDtoFromUser)
