@@ -2,6 +2,7 @@ package com.example.mentorsstudents.controller;
 
 import com.example.mentorsstudents.dto.ErrorExtension;
 import com.example.mentorsstudents.dto.ErrorResponse;
+import com.example.mentorsstudents.service.exception.RegistrationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
                 HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(RegistrationException.class)
     public ResponseEntity<ErrorExtension> handleUserRegistrationExceptions(Exception exception) {
         ErrorExtension body = new ErrorExtension(exception.getMessage(),
                 String.valueOf(HttpStatus.CONFLICT.value()));

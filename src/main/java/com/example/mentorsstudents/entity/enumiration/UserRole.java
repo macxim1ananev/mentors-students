@@ -2,5 +2,6 @@ package com.example.mentorsstudents.entity.enumiration;
 
 public enum UserRole {
     STUDENT,
-    MENTOR
+    MENTOR,
+    NOT_REGISTERED
 }
