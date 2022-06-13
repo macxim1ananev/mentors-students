@@ -5,13 +5,15 @@ import com.example.mentorsstudents.entity.AboutUser;
 import com.example.mentorsstudents.entity.Image;
 import com.example.mentorsstudents.entity.Subject;
 import com.example.mentorsstudents.entity.User;
+import com.example.mentorsstudents.mapper.annotation.BaseImageInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import java.util.Set;
 
 
-@Mapper(componentModel = "spring", uses = {SubjectMapper.class, ImageMapper.class})
+@Mapper(componentModel = "spring", uses = {SubjectMapper.class, ImageMapper.class, AboutUserMapper.class})
 
 public interface UserMapper {
     @Mapping(source = "user.userId", target = "id")
@@ -59,5 +61,6 @@ public interface UserMapper {
     @Mapping(source = "user.lastName", target = "lastName")
     @Mapping(source = "subjects", target = "subjects")
     StudentForSearchPageDto toStudentForSearchPageDtoFromUser(User user);
-
+    @Mapping(source = "userDtoForUpdate.image", target = "existedUser.image", qualifiedBy = BaseImageInfo.class)
+    User updateUser(UserDtoForUpdate userDtoForUpdate,  @MappingTarget User existedUser);
 }

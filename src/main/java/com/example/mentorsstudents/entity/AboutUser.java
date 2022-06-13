@@ -24,6 +24,9 @@ public class AboutUser {
     @Column(name = "text_about_user")
     private String textAboutUser;
 
+    @OneToOne(mappedBy = "aboutUser")
+    private User user;
+
 
     @Override
     public boolean equals(Object o) {
