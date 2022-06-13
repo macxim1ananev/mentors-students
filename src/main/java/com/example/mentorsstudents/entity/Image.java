@@ -24,6 +24,9 @@ public class Image {
     @Column(name = "image_location")
     private String location;
 
+    @OneToOne(mappedBy = "image")
+    private User user;
+
 
     @Override
     public boolean equals(Object o) {

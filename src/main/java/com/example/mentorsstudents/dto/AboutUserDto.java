@@ -6,7 +6,6 @@ import lombok.Value;
 @Value
 public class AboutUserDto {
 
-    Long id;
+    Long aboutUserId;
     String textAboutUser;
-    User user;
 }

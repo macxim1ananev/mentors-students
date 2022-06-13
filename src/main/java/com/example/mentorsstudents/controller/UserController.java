@@ -2,6 +2,7 @@ package com.example.mentorsstudents.controller;
 
 import com.example.mentorsstudents.dto.AfterSuccessRegistrationDto;
 import com.example.mentorsstudents.dto.UserDto;
+import com.example.mentorsstudents.dto.UserDtoForUpdate;
 import com.example.mentorsstudents.dto.UserRegistrationDto;
 import com.example.mentorsstudents.service.RegistrationService;
 import com.example.mentorsstudents.service.UserService;
@@ -22,7 +23,18 @@ public class UserController {
     @GetMapping("/{id}/")
     @ResponseStatus(HttpStatus.OK)
     public UserDto findUserById(@PathVariable ("id") Long id){
-        UserDto userDto = userService.findUserById(id);
-        return userDto;
+        return userService.findUserById(id);
+    }
+
+    @DeleteMapping("/{id}/")
+    public ResponseEntity<String> deleteUserById(@PathVariable ("id") Long id){
+        userService.deleteUserById(id);
+        return new ResponseEntity<>("User with id " + id + " was deleted", HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{id}/")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDto updateUserById(@PathVariable ("id") Long id, @RequestBody UserDtoForUpdate user){
+        return userService.updateUserById(id, user);
     }
 }

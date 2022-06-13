@@ -1,6 +1,7 @@
 package com.example.mentorsstudents.service.impl;
 
 import com.example.mentorsstudents.dto.UserDto;
+import com.example.mentorsstudents.dto.UserDtoForUpdate;
 import com.example.mentorsstudents.entity.User;
 import com.example.mentorsstudents.mapper.UserMapper;
 import com.example.mentorsstudents.repository.UserRepository;
@@ -31,7 +32,19 @@ public class UserServiceImpl implements UserService {
     public UserDto findUserById(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User with this ID not found %d", id)));
-
         return userMapper.toDto(user);
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public UserDto updateUserById(Long id, UserDtoForUpdate user) {
+        User userForUpdate = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(String.format("User with this ID not found %d", id)));
+        User updatedUser = userMapper.updateUser(user, userForUpdate);
+        return userMapper.toDto(userRepository.save(updatedUser));
     }
 }
