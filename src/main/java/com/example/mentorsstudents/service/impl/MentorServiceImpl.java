@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +17,6 @@ import java.util.stream.Collectors;
 public class MentorServiceImpl implements MentorService {
 
     private final UserRepository userRepository;
-
     private final UserMapper userMapper;
 
     @Override
@@ -28,6 +26,4 @@ public class MentorServiceImpl implements MentorService {
                 .stream().map(userMapper::toMentorForSearchPagDtoFromUser)
                 .collect(Collectors.toList());
     }
-
-
 }

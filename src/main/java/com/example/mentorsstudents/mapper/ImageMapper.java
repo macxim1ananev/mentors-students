@@ -7,8 +7,11 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface ImageMapper {
+
     ImageDto toDto(Image image);
+
     @BaseImageInfo
     Image toImage(ImageDto imageDto);
+
     Image toImageFromUserRegistrationDto(ImageDto imageDto);
 }

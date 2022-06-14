@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -46,6 +44,7 @@ public class User {
     @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "about_user", referencedColumnName = "id")
     private AboutUser aboutUser;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role")
     private UserRole userRole;

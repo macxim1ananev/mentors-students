@@ -1,7 +1,6 @@
 package com.example.mentorsstudents.validation.impl;
 
 import com.example.mentorsstudents.validation.annotation.Name;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 

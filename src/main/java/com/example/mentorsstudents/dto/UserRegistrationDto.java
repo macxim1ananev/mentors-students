@@ -4,7 +4,6 @@ import com.example.mentorsstudents.validation.annotation.Name;
 import com.example.mentorsstudents.validation.annotation.Password;
 import com.example.mentorsstudents.validation.annotation.UserAge;
 import lombok.Value;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

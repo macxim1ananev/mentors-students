@@ -1,7 +1,6 @@
 package com.example.mentorsstudents.validation.annotation;
 
 import com.example.mentorsstudents.validation.impl.NameConstraint;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.ElementType;

@@ -13,6 +13,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {PasswordConstraint.class})
 public @interface Password {
+
     String message() default "Password must be 6-20 characters long and includes at least " +
             "one symbol from capital latin letters, lowercase latin letters, numbers, auxiliary.";
 

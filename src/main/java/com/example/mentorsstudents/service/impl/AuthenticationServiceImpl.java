@@ -20,7 +20,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
-
     private final JwtTokenUtil jwtTokenUtil;
 
     @Override

@@ -9,13 +9,13 @@ import com.example.mentorsstudents.mapper.annotation.BaseImageInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-
 import java.util.Set;
 
 
 @Mapper(componentModel = "spring", uses = {SubjectMapper.class, ImageMapper.class, AboutUserMapper.class})
 
 public interface UserMapper {
+
     @Mapping(source = "user.userId", target = "id")
     @Mapping(source = "user.firstName", target = "firstName")
     @Mapping(source = "user.lastName", target = "lastName")
@@ -50,6 +50,7 @@ public interface UserMapper {
     @Mapping(source = "subjects", target = "subjects")
     @Mapping(source = "user.userRole", target = "userRole")
     AfterSuccessRegistrationDto toDtoAfterRegistrationUer(User user, Image image, AboutUser aboutUser, Set<Subject> subjects);
+
     @Mapping(source = "user.image", target = "image")
     @Mapping(source = "user.firstName", target = "firstName")
     @Mapping(source = "user.lastName", target = "lastName")

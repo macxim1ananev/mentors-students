@@ -10,17 +10,14 @@ import com.example.mentorsstudents.entity.enumiration.UserRole;
 import com.example.mentorsstudents.mapper.AboutUserMapper;
 import com.example.mentorsstudents.mapper.ImageMapper;
 import com.example.mentorsstudents.mapper.UserMapper;
-import com.example.mentorsstudents.repository.SubjectRepository;
 import com.example.mentorsstudents.repository.UserRepository;
 import com.example.mentorsstudents.service.RegistrationService;
 import com.example.mentorsstudents.service.exception.ErrorMessage;
 import com.example.mentorsstudents.service.exception.UserAlreadyRegisteredException;
-import com.example.mentorsstudents.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Optional;
 
 @Service
@@ -28,16 +25,10 @@ import java.util.Optional;
 public class RegistrationServiceImpl implements RegistrationService {
 
     private final UserRepository userRepository;
-    private final SubjectRepository subjectRepository;
-
     private final UserMapper userMapper;
     private final AboutUserMapper aboutUserMapper;
-
     private final ImageMapper imageMapper;
-
     private final PasswordEncoder passwordEncoder;
-
-    private final UserUtil userUtil;
 
     @Override
     public AfterSuccessRegistrationDto registrationUser(UserRegistrationDto userRegistrationDto) {
@@ -83,5 +74,4 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .userRole(UserRole.NOT_REGISTERED)
                 .build();
     }
-
 }

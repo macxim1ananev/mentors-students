@@ -18,5 +18,4 @@ public @interface UserAge {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
 }
