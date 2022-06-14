@@ -7,4 +7,6 @@ public class ErrorMessage {
             "A customer with this email address is already registered, you cannot register again. Sign in to an existing account or enter a new one.";
 
     public static final String TOKEN_INVALID_MESS = "Token invalid or expired";
+
+    public static final String AUTH_FAILED_MESS_INCORRECT_PASSWORD = "Incorrect password";
 }
