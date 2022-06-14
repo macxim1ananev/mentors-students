@@ -1,6 +1,7 @@
 package com.example.mentorsstudents.security;
 
 import com.example.mentorsstudents.entity.User;
+import com.example.mentorsstudents.service.UserService;
 import com.example.mentorsstudents.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,13 +11,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserDetailService implements UserDetailsService {
+public class UserDetailServiceImpl implements UserDetailsService {
 
-    private final UserUtil userUtil;
+    private final UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        User user = userUtil.findByLogin(login);
+        User user = userService.loadUserByLogin(login);
 
         return org.springframework.security.core.userdetails.User
                 .builder().username(user.getEmail())
