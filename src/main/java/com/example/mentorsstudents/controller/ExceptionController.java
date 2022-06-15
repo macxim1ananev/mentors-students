@@ -5,6 +5,7 @@ import com.example.mentorsstudents.dto.ErrorResponse;
 import com.example.mentorsstudents.service.exception.PasswordMismatchException;
 import com.example.mentorsstudents.service.exception.RegistrationException;
 import com.example.mentorsstudents.service.exception.UserNotFoundException;
+import com.example.mentorsstudents.service.exception.UserRegistrationVerificationTokenException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,14 +42,21 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<ErrorExtension> handleUserNotFoundExceptions(Exception exception){
+    public ResponseEntity<ErrorExtension> handleUserNotFoundExceptions(Exception exception) {
         ErrorExtension body = new ErrorExtension(exception.getMessage(),
                 String.valueOf(HttpStatus.CONFLICT.value()));
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(PasswordMismatchException.class)
-    public ResponseEntity<ErrorExtension> handleUserUpdatePasswordExceptions(Exception exception){
+    public ResponseEntity<ErrorExtension> handleUserUpdatePasswordExceptions(Exception exception) {
+        ErrorExtension body = new ErrorExtension(exception.getMessage(),
+                String.valueOf(HttpStatus.CONFLICT.value()));
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(UserRegistrationVerificationTokenException.class)
+    public ResponseEntity<ErrorExtension> handleUserRegistrationVerificationTokenExceptions(Exception exception) {
         ErrorExtension body = new ErrorExtension(exception.getMessage(),
                 String.valueOf(HttpStatus.CONFLICT.value()));
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);

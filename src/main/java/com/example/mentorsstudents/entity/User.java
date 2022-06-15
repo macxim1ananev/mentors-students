@@ -1,10 +1,12 @@
 package com.example.mentorsstudents.entity;
 
 import com.example.mentorsstudents.entity.enumiration.UserRole;
+import com.example.mentorsstudents.entity.enumiration.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
@@ -37,7 +39,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "image_id", referencedColumnName = "id")
     private Image image;
 
@@ -48,6 +50,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role")
     private UserRole userRole;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_status")
+    private UserStatus userStatus;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(

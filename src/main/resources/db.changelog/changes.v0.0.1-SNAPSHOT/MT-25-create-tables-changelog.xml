@@ -84,6 +84,7 @@
                               unique="true"/>
             </column>
             <column name="user_role" type="varchar(25)"/>
+            <column name="user_status" type="varchar(25)"/>
         </createTable>
     </changeSet>
 
@@ -104,4 +105,23 @@
         </createTable>
     </changeSet>
 
+    <!--verification tokens-->
+    <!--    TODO отрефакторить чтобы сохранять картинки-->
+    <changeSet author="maksim.ananev" id="create verification_tokens table">
+        <preConditions onFail="CONTINUE" onFailMessage="Table verification_tokens already exists">
+            <not>
+                <tableExists tableName="verification_tokens"/>
+            </not>
+        </preConditions>
+        <createTable tableName="verification_tokens">
+            <column  name="token_id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="token" type="varchar(500)"/>
+            <column  name="user_id" autoIncrement="true" type="bigint">
+                <constraints foreignKeyName="fk__verification_tokens_users" references="users(id)"/>
+            </column>
+            <column name="expiry_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

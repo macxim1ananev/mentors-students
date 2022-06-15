@@ -6,7 +6,7 @@ import com.example.mentorsstudents.dto.UserRegistrationDto;
 import com.example.mentorsstudents.entity.AboutUser;
 import com.example.mentorsstudents.entity.Image;
 import com.example.mentorsstudents.entity.User;
-import com.example.mentorsstudents.entity.enumiration.UserRole;
+import com.example.mentorsstudents.entity.enumiration.UserStatus;
 import com.example.mentorsstudents.mapper.AboutUserMapper;
 import com.example.mentorsstudents.mapper.ImageMapper;
 import com.example.mentorsstudents.mapper.UserMapper;
@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Optional;
 
 @Service
@@ -32,8 +33,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public AfterSuccessRegistrationDto registrationUser(UserRegistrationDto userRegistrationDto) {
-        UserRole userRole = checkUserRegistration(userRegistrationDto.getEmail()).getUserRole();
-        if (userRole.equals(UserRole.NOT_REGISTERED)) {
+        UserStatus userStatus = checkUserRegistration(userRegistrationDto.getEmail()).getUserStatus();
+        if (userStatus.equals(UserStatus.NOT_REGISTERED)) {
             User user = userRepository.save(userRegistrationMapper(userRegistrationDto));
             return userMapper.toDtoAfterRegistrationUer(user, user.getImage(), user.getAboutUser(), user.getSubjects());
         }
@@ -63,7 +64,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private CheckUserRegistrationDto getRegisteredCheckUserDto(User user){
         return CheckUserRegistrationDto.builder()
                 .email(user.getEmail())
-                .userRole(user.getUserRole())
+                .userStatus(user.getUserStatus())
                 .idCustomer(user.getUserId())
                 .build();
     }
@@ -71,7 +72,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private CheckUserRegistrationDto getNotRegisteredCheckUserDto(String email){
         return CheckUserRegistrationDto.builder()
                 .email(email)
-                .userRole(UserRole.NOT_REGISTERED)
+                .userStatus(UserStatus.NOT_REGISTERED)
                 .build();
     }
 }
