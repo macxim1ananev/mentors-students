@@ -64,6 +64,7 @@
             <column name="image_id" value="10"/>
             <column name="about_user" value="10"/>
             <column name="user_role" value="STUDENT"/>
+            <column name="user_status" value="ACTIVE"/>
         </insert>
     </changeSet>
 

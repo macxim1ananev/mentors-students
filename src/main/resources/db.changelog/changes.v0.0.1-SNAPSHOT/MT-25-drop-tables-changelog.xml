@@ -52,4 +52,13 @@
         </rollback>
     </changeSet>
 
+    <changeSet author="maxim.ananev" id="drop verification_tokens table">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="verification_tokens"/>
+        </preConditions>
+        <rollback>
+            <dropTable tableName="verification_tokens"/>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>

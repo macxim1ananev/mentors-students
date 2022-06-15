@@ -14,6 +14,19 @@ spring:
     serialization:
       fail-on-empty-beans: false
 
+  mail:
+    host: smtp.yandex.ru
+    username: ${emailSenderLogin.local}
+    password: ${emailSenderPassword.local}
+    port: 465
+    protocol: smtps
+    properties:
+      ssl:
+        enable: true
+      smtp:
+        auth: true
+
+
 jwt:
   secret:
     access: ${jwt.secret.access}
