@@ -38,9 +38,9 @@ public class RegistrationController {
         return verificationService.confirmationUserRegistration(token);
     }
 
-    @GetMapping("/{email}/")
+    @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public CheckUserRegistrationDto checkUserRegistration(@PathVariable("email") String email) {
+    public CheckUserRegistrationDto checkUserRegistration(@RequestParam String email) {
         return registrationService.checkUserRegistration(email);
     }
 }
