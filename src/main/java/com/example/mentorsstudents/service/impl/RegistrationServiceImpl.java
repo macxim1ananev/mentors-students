@@ -32,6 +32,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional
     public AfterSuccessRegistrationDto registrationUser(UserRegistrationDto userRegistrationDto) {
         UserStatus userStatus = checkUserRegistration(userRegistrationDto.getEmail()).getUserStatus();
         if (userStatus.equals(UserStatus.NOT_REGISTERED)) {

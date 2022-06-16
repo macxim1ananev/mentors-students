@@ -34,11 +34,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public UserDto updateUserById(Long id, UserDtoForUpdate user) {
         User userForUpdate = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User with this ID not found %d", id)));

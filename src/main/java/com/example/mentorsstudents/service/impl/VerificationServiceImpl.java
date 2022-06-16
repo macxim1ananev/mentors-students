@@ -12,6 +12,7 @@ import com.example.mentorsstudents.service.exception.UserRegistrationVerificatio
 import com.example.mentorsstudents.util.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 
@@ -26,6 +27,7 @@ public class VerificationServiceImpl implements VerificationService {
     private final VerificationTokenMapper verificationTokenMapper;
 
     @Override
+    @Transactional
     public void createVerificationToken(Long userId, String token) {
         VerificationToken verificationToken = verificationTokenMapper.toVerificationToken(userId, token);
         verificationToken.setExpiryDate(1440);
@@ -33,6 +35,7 @@ public class VerificationServiceImpl implements VerificationService {
     }
 
     @Override
+    @Transactional
     public MessageResponse confirmationUserRegistration(String token) {
         VerificationToken verificationToken = getVerificationToken(token);
         Calendar calendar = Calendar.getInstance();
