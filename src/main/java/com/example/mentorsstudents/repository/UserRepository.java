@@ -17,7 +17,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @EntityGraph(attributePaths = {"subjects"})
+    @EntityGraph(attributePaths = {"subjects", "image"})
     List<User> findAllByUserRole(UserRole userRole);
 
     @Query("from User user where user.email = :login")
