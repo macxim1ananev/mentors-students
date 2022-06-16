@@ -28,7 +28,7 @@ public class RegistrationController {
     @ResponseStatus(HttpStatus.CREATED)
     public AfterSuccessRegistrationDto userRegistration(@Valid @RequestBody UserRegistrationDto userRegistrationDto) {
         AfterSuccessRegistrationDto resultDto = registrationService.registrationUser(userRegistrationDto);
-        eventPublisher.publishEvent(new UserActivateAfterRegistrationEvent(resultDto));
+       // eventPublisher.publishEvent(new UserActivateAfterRegistrationEvent(resultDto));
         return resultDto;
     }
 

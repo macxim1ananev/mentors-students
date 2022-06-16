@@ -34,6 +34,7 @@ public interface UserMapper {
     @Mapping(source = "dto.email", target = "email")
     @Mapping(source = "dto.password", target = "password")
     @Mapping(source = "dto.userRole", target = "userRole")
+    @Mapping(source = "dto.userStatus", target = "userStatus")
     @Mapping(source = "image", target = "image")
     @Mapping(source = "aboutUser", target = "aboutUser")
     @Mapping(source = "subjects", target = "subjects")

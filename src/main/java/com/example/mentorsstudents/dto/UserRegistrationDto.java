@@ -28,4 +28,6 @@ public class UserRegistrationDto {
     Set<SubjectDto> subjects;
     @NotNull
     String userRole;
+    @NotNull
+    String userStatus;
 }
