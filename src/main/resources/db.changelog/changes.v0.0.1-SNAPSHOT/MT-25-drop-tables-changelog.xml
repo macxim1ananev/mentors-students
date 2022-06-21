@@ -61,4 +61,13 @@
         </rollback>
     </changeSet>
 
+    <changeSet author="maxim.ananev" id="drop password_reset_tokens table">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="password_reset_tokens"/>
+        </preConditions>
+        <rollback>
+            <dropTable tableName="password_reset_tokens"/>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>

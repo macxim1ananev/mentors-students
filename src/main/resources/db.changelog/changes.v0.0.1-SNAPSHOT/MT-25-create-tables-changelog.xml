@@ -71,7 +71,9 @@
             <column name="first_name" type="varchar(30)"/>
             <column name="last_name" type="varchar(30)"/>
             <column name="age" type="varchar(5)"/>
-            <column name="email" type="varchar(50)"/>
+            <column name="email" type="varchar(50)">
+                <constraints unique="true"/>
+            </column>
             <column name="password" type="varchar(255)">
             <constraints nullable="false"/>
             </column>
@@ -106,7 +108,6 @@
     </changeSet>
 
     <!--verification tokens-->
-    <!--    TODO отрефакторить чтобы сохранять картинки-->
     <changeSet author="maksim.ananev" id="create verification_tokens table">
         <preConditions onFail="CONTINUE" onFailMessage="Table verification_tokens already exists">
             <not>
@@ -117,11 +118,35 @@
             <column  name="token_id" autoIncrement="true" type="bigint">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="token" type="varchar(500)"/>
+            <column name="token"  type="varchar(500)">
+                <constraints unique="true"/>
+            </column>
             <column  name="user_id" autoIncrement="true" type="bigint">
                 <constraints foreignKeyName="fk__verification_tokens_users" references="users(id)"/>
             </column>
             <column name="expiry_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
         </createTable>
     </changeSet>
+
+    <!--password reset tokens-->
+    <changeSet author="maksim.ananev" id="create password_reset_tokens table">
+        <preConditions onFail="CONTINUE" onFailMessage="Table password_reset_tokens already exists">
+            <not>
+                <tableExists tableName="password_reset_tokens"/>
+            </not>
+        </preConditions>
+        <createTable tableName="password_reset_tokens">
+            <column  name="token_id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="token"  type="varchar(500)">
+                    <constraints unique="true"/>
+            </column>
+            <column  name="user_id" autoIncrement="true" type="bigint">
+                <constraints foreignKeyName="fk__verification_tokens_users" references="users(id)"/>
+            </column>
+            <column name="expiry_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>

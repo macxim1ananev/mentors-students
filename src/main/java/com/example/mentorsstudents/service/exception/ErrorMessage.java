@@ -15,4 +15,5 @@ public class ErrorMessage {
     public static final String INVALID_TOKEN_FOR_CONFIRM_REGISTRATION_USER = "Invalid token.";
 
     public static final String TOKEN_HAS_EXPIRED = "The token has expired to confirm registration, request a new token.";
+    public static String RESET_PASSWORD_TOKEN_INVALID = "The token invalid.";
 }

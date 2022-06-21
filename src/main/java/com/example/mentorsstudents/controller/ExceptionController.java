@@ -2,10 +2,7 @@ package com.example.mentorsstudents.controller;
 
 import com.example.mentorsstudents.dto.ErrorExtension;
 import com.example.mentorsstudents.dto.ErrorResponse;
-import com.example.mentorsstudents.service.exception.PasswordMismatchException;
-import com.example.mentorsstudents.service.exception.RegistrationException;
-import com.example.mentorsstudents.service.exception.UserNotFoundException;
-import com.example.mentorsstudents.service.exception.UserRegistrationVerificationTokenException;
+import com.example.mentorsstudents.service.exception.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +54,13 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(UserRegistrationVerificationTokenException.class)
     public ResponseEntity<ErrorExtension> handleUserRegistrationVerificationTokenExceptions(Exception exception) {
+        ErrorExtension body = new ErrorExtension(exception.getMessage(),
+                String.valueOf(HttpStatus.CONFLICT.value()));
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(UserResetPasswordException.class)
+    public ResponseEntity<ErrorExtension> handleUserUserResetPasswordExceptionExceptions(Exception exception) {
         ErrorExtension body = new ErrorExtension(exception.getMessage(),
                 String.valueOf(HttpStatus.CONFLICT.value()));
         return new ResponseEntity<>(body, HttpStatus.CONFLICT);

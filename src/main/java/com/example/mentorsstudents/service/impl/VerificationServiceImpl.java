@@ -11,10 +11,13 @@ import com.example.mentorsstudents.service.exception.ErrorMessage;
 import com.example.mentorsstudents.service.exception.UserRegistrationVerificationTokenException;
 import com.example.mentorsstudents.util.Message;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
@@ -44,6 +47,12 @@ public class VerificationServiceImpl implements VerificationService {
         }
         userRepository.setUserStatus(UserStatus.ACTIVE, verificationToken.getUserId());
         return new MessageResponse(Message.CONFIRM_REGISTRATION_SUCCESSFULLY);
+    }
+    @Scheduled(cron = "@daily")
+    @Override
+    @Transactional
+    public void deleteOldVerificationTokens() {
+        verificationTokenRepository.deleteOldVerificationTokens();
     }
 
     private VerificationToken getVerificationToken(String token) {
