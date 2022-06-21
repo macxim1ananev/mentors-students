@@ -12,4 +12,6 @@ public interface UserSettingService {
     PasswordResetToken createResetPasswordTokenByUserEmail(String userEmail);
 
     MessageResponse confirmUserPasswordResetToken(CheckUserPasswordResetTokenDto checkUserPasswordResetTokenDto);
+
+    void deleteOldPasswordResetTokens();
 }

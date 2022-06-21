@@ -2,6 +2,7 @@ package com.example.mentorsstudents.repository;
 
 import com.example.mentorsstudents.entity.PasswordResetToken;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -11,4 +12,8 @@ public interface ResetPasswordTokenRepository extends JpaRepository<PasswordRese
 
     @Query("from PasswordResetToken passwordResetToken where passwordResetToken.token = :token")
     Optional<PasswordResetToken> getUserPasswordResetToken(@Param("token") String token);
+
+    @Modifying
+    @Query("delete from PasswordResetToken passwordResetToken where passwordResetToken.expiryDate < CURRENT_TIMESTAMP")
+    void deleteOldPasswordResetTokens();
 }

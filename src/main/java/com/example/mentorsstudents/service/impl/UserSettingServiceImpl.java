@@ -13,6 +13,7 @@ import com.example.mentorsstudents.service.exception.*;
 import com.example.mentorsstudents.util.Message;
 import com.example.mentorsstudents.util.UserUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,6 +64,12 @@ public class UserSettingServiceImpl implements UserSettingService {
         userRepository.updatePasswordByUserId(passwordResetToken.getUserId()
                 , passwordEncoder.encode(passwordResetTokenDto.getNewPassword()));
         return new MessageResponse(Message.PASSWORD_CHANGED);
+    }
+    @Scheduled(cron = "@daily")
+    @Override
+    @Transactional
+    public void deleteOldPasswordResetTokens() {
+        resetPasswordTokenRepository.deleteOldPasswordResetTokens();
     }
 
     private PasswordResetToken getPasswordResetToken(String token) {
